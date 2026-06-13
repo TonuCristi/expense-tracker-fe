@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+.nav-link-active {
+  @apply bg-zinc-400;
+}
