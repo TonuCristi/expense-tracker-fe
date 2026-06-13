@@ -6,7 +6,7 @@ type Type = 'button' | 'submit' | 'reset';
 
 const VARIANT_STYLES: Record<Variant, string> = {
   primary:
-    'py-1 px-2 bg-zinc-100 hover:bg-zinc-400 active:bg-zinc-400 disabled:bg-zinc-400 rounded-md text-zinc-900',
+    'py-1 px-2 bg-zinc-100 hover:bg-zinc-300 active:bg-zinc-300 disabled:bg-zinc-300 rounded-md text-zinc-900',
   secondary:
     'py-1 px-2 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-800 disabled:bg-zinc-800 rounded-md text-zinc-100',
 };

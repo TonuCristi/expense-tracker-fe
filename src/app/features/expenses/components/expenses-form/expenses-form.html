@@ -1,0 +1,32 @@
+<form formGroupName="expensesForm">
+  <ng-container formArrayName="expenses">
+    @for (expense of expenses.controls; track $index; let i = $index) {
+      <div formGroupName="i" class="flex items-center gap-2">
+        <input
+          type="number"
+          formControlName="amount"
+          placeholder="Enter amount"
+          class="border border-zinc-100 rounded-md p-1"
+        />
+        <input
+          type="text"
+          formControlName="category"
+          placeholder="Enter category"
+          class="border border-zinc-100 rounded-md p-1"
+        />
+        <input
+          type="date"
+          formControlName="date"
+          placeholder="Enter date"
+          class="border border-zinc-100 rounded-md p-1"
+        />
+        <input
+          type="text"
+          formControlName="note"
+          placeholder="Enter note"
+          class="border border-zinc-100 rounded-md p-1"
+        />
+      </div>
+    }
+  </ng-container>
+</form>
