@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Profile } from './profile/profile';
+import { Profile } from './profile';
 
 export const profileRoutes: Routes = [
   {
