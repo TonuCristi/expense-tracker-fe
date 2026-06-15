@@ -1,5 +1,5 @@
 @import 'tailwindcss';
 
 :host {
-  @apply h-dvh flex flex-col;
+  @apply h-dvh grid grid-cols-[20fr_80fr] p-4 gap-8;
 }

@@ -1,0 +1,18 @@
+<aside>
+  <a routerLink="/" class="font-bold text-2xl mb-4 inline-block px-2">Trackr.</a>
+
+  <nav class="flex flex-col gap-2">
+    @for (navLink of navLinks; track navLink.path) {
+      <a
+        [routerLink]="navLink.path"
+        routerLinkActive="nav-link-active"
+        class="p-2 hover:bg-zinc-900 active:bg-zinc-900 rounded-md text-zinc-100 transition-all font-semibold flex items-center gap-4"
+      >
+        <i [class]="navLink.iconClass"></i>
+        <span>
+          {{ navLink.label }}
+        </span>
+      </a>
+    }
+  </nav>
+</aside>
