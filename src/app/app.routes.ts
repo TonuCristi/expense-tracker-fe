@@ -14,14 +14,14 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.routes').then((m) => m.dashboardRoutes),
       },
       {
-        path: 'expenses',
+        path: 'wallets',
         loadChildren: () =>
-          import('./features/expenses/expenses.routes').then((m) => m.expensesRoutes),
+          import('./features/wallets/wallets.routes').then((m) => m.walletsRoutes),
       },
       {
-        path: 'profile',
+        path: 'settings',
         loadChildren: () =>
-          import('./features/profile/profile.routes').then((m) => m.profileRoutes),
+          import('./features/settings/settings.routes').then((m) => m.settingsRoutes),
       },
     ],
   },
