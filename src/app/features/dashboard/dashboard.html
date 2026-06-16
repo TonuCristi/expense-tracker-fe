@@ -1,26 +1,5 @@
-<header>
+<header class="flex justify-between items-center gap-8 mb-4">
   <app-page-title />
+  <app-add-wallet-button />
 </header>
-<div class="flex gap-4">
-  <div class="bg-zinc-900 rounded-md p-4 w-3xs">
-    <div class="text-zinc-500 mb-1 flex items-center justify-between gap-4">
-      <h3 class="font-semibold">Cash</h3>
-      <i class="pi pi-money-bill"></i>
-    </div>
-    <span class="font-bold text-2xl">895.01 EUR</span>
-  </div>
-  <div class="bg-zinc-900 rounded-md p-4 w-3xs">
-    <div class="text-zinc-500 mb-1 flex items-center justify-between gap-4">
-      <h3 class="font-semibold">Maib</h3>
-      <i class="pi pi-money-bill"></i>
-    </div>
-    <span class="font-bold text-2xl">895.01 EUR</span>
-  </div>
-  <div class="bg-zinc-900 rounded-md p-4 w-3xs">
-    <div class="text-zinc-500 mb-1 flex items-center justify-between gap-4">
-      <h3 class="font-semibold">Revolut</h3>
-      <i class="pi pi-money-bill"></i>
-    </div>
-    <span class="font-bold text-2xl">895.01 EUR</span>
-  </div>
-</div>
+<app-wallets-carousel />
