@@ -1,15 +1,18 @@
 <aside>
-  <a routerLink="/" class="font-bold text-2xl mb-4 inline-block px-2">Trackr.</a>
+  <a routerLink="/" class="font-bold text-2xl mb-4 inline-block px-2">
+    <span class="hidden md:block">Trackr.</span>
+    <span class="block md:hidden">T.</span>
+  </a>
 
   <nav class="flex flex-col gap-2">
     @for (navLink of navLinks; track navLink.path) {
       <a
         [routerLink]="navLink.path"
         routerLinkActive="nav-link-active"
-        class="p-2 hover:bg-zinc-900 active:bg-zinc-900 rounded-md text-zinc-100 transition-all font-semibold flex items-center gap-4"
+        class="p-2 hover:bg-zinc-900 active:bg-zinc-900 rounded-md text-zinc-100 transition-all font-semibold flex items-center justify-center md:justify-normal gap-4"
       >
         <i [class]="navLink.iconClass"></i>
-        <span>
+        <span class="hidden md:block">
           {{ navLink.label }}
         </span>
       </a>

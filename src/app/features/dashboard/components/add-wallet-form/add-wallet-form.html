@@ -1,4 +1,4 @@
-<div class="w-full h-dvh fixed inset-0 bg-zinc-800/70 flex items-center justify-center">
+<div class="w-full h-dvh fixed inset-0 bg-zinc-800/70 flex items-center justify-center p-4">
   <div class="bg-zinc-950 rounded-md p-4 w-sm">
     <div class="flex gap-4 items-center justify-between border-b border-zinc-800 mb-4 pb-2">
       <h2 class="text-lg font-semibold">Add wallet</h2>
@@ -11,38 +11,48 @@
       <div class="flex flex-col gap-1">
         <label for="name" class="text-xs font-semibold text-zinc-500">Name</label>
         <input
-        id="name"
+          id="name"
           type="text"
           [formField]="addWalletForm.name"
           class="rounded-md p-2 border border-zinc-800"
         />
-        @if(addWalletForm.name().invalid() && addWalletForm.name().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{addWalletForm.name().errors()[0].message}}</span>
+        @if (addWalletForm.name().invalid() && addWalletForm.name().touched()) {
+          <span class="text-xs text-red-500 font-semibold">{{
+            addWalletForm.name().errors()[0].message
+          }}</span>
         }
       </div>
 
       <div class="flex flex-col gap-1">
         <label for="currency" class="text-xs font-semibold text-zinc-500">Currency</label>
-        <select id="currency" [formField]="addWalletForm.currency" class="rounded-md p-2 border border-zinc-800 bg-zinc-950">
-          @for(option of currencyOptions; track option.value){
-            <option [value]="option.value" class="text-zinc-100">{{option.label}}</option>
+        <select
+          id="currency"
+          [formField]="addWalletForm.currency"
+          class="rounded-md p-2 border border-zinc-800 bg-zinc-950"
+        >
+          @for (option of currencyOptions; track option.value) {
+            <option [value]="option.value" class="text-zinc-100">{{ option.label }}</option>
           }
         </select>
-        @if(addWalletForm.currency().invalid() && addWalletForm.currency().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{addWalletForm.currency().errors()[0].message}}</span>
+        @if (addWalletForm.currency().invalid() && addWalletForm.currency().touched()) {
+          <span class="text-xs text-red-500 font-semibold">{{
+            addWalletForm.currency().errors()[0].message
+          }}</span>
         }
       </div>
 
       <div class="flex flex-col gap-1">
         <label for="balance" class="text-xs font-semibold text-zinc-500">Balance</label>
         <input
-        id="balance"
+          id="balance"
           type="number"
           [formField]="addWalletForm.balance"
           class="rounded-md p-2 border border-zinc-800"
         />
-        @if(addWalletForm.balance().invalid() && addWalletForm.balance().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{addWalletForm.balance().errors()[0].message}}</span>
+        @if (addWalletForm.balance().invalid() && addWalletForm.balance().touched()) {
+          <span class="text-xs text-red-500 font-semibold">{{
+            addWalletForm.balance().errors()[0].message
+          }}</span>
         }
       </div>
 

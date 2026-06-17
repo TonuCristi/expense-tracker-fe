@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+
 import { Button } from '../../../../shared/ui/button/button';
 import { AddWalletForm } from '../add-wallet-form/add-wallet-form';
 
