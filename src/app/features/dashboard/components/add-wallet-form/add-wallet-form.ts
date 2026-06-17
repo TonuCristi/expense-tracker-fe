@@ -1,15 +1,10 @@
 import { Component, model, signal } from '@angular/core';
-import { Button } from '../../../../shared/ui/button/button';
 import { form, FormField, FormRoot, maxLength, min, required } from '@angular/forms/signals';
+
+import { Button } from '../../../../shared/ui/button/button';
+
 import { CURRENCY } from '../../dashboard.models';
 import { CURRENCY_OPTIONS } from '../../dashboard.constants';
-
-const ADD_WALLET_FORM_INPUTS = [
-  { type: 'text', name: 'name', label: 'Name' },
-  { type: 'text', name: 'currency', label: 'Currency' },
-  { type: 'text', name: 'balance', label: 'Balance' },
-];
-
 
 interface AddWalletFormModel {
   name: string;
@@ -32,22 +27,25 @@ export class AddWalletForm {
     balance: 0,
   });
 
-  public readonly addWalletFormInputs = ADD_WALLET_FORM_INPUTS;
   public readonly currencyOptions = CURRENCY_OPTIONS;
 
-  public addWalletForm = form(this.addWalletModel, (schemaPath) => {
-    required(schemaPath.name, { message: "Name field is required!" });
-    maxLength(schemaPath.name, 60, { message: 'The name is too long!' });
-    
-    required(schemaPath.currency, { message: "Currency field is required!" });
+  public addWalletForm = form(
+    this.addWalletModel,
+    (schemaPath) => {
+      required(schemaPath.name, { message: 'Name field is required!' });
+      maxLength(schemaPath.name, 60, { message: 'The name is too long!' });
 
-    required(schemaPath.balance, { message: "Balance field is required!" });
-    min(schemaPath.balance, 0, { message: 'Balance must be at least 0!' });
-  }, {
-    submission: {
-      action: this.submitForm,
+      required(schemaPath.currency, { message: 'Currency field is required!' });
+
+      required(schemaPath.balance, { message: 'Balance field is required!' });
+      min(schemaPath.balance, 0, { message: 'Balance must be at least 0!' });
     },
-  });
+    {
+      submission: {
+        action: this.submitForm,
+      },
+    },
+  );
 
   public closeForm() {
     this.isFormOpen.set(false);
