@@ -51,7 +51,7 @@ export class AddWalletForm {
     this.isFormOpen.set(false);
   }
 
-  public async submitForm() {
+  private async submitForm() {
     console.log('Wallet added!');
   }
 }
