@@ -1,7 +1,32 @@
 import { Component, signal } from '@angular/core';
-import { form, required, FormRoot, FormField } from '@angular/forms/signals';
+import { form, required, FormRoot, FormField, maxLength, email } from '@angular/forms/signals';
+
 import { Button } from '../../../shared/ui/button/button';
-import { Input } from '../../../shared/ui/input/input';
+import { RouterLink } from '@angular/router';
+
+const REGISTER_INPUTS = [
+  {
+    id: 'username',
+    label: 'Username',
+    type: 'text',
+    name: 'username',
+    placeholder: 'Enter your username',
+  },
+  {
+    id: 'email',
+    label: 'Email',
+    type: 'text',
+    name: 'email',
+    placeholder: 'Enter your email',
+  },
+  {
+    id: 'password',
+    label: 'Password',
+    type: 'password',
+    name: 'password',
+    placeholder: 'Enter your password',
+  },
+] as const;
 
 interface RegisterFormModel {
   username: string;
@@ -11,28 +36,35 @@ interface RegisterFormModel {
 
 @Component({
   selector: 'app-register',
-  imports: [FormRoot, FormField, Button, Input],
+  imports: [FormRoot, FormField, Button, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
 export class Register {
-  public registerModel = signal<RegisterFormModel>({
+  public readonly registerInputs = REGISTER_INPUTS;
+
+  public readonly registerModel = signal<RegisterFormModel>({
     username: '',
     email: '',
     password: '',
   });
 
-  public registerForm = form(
+  public readonly registerForm = form(
     this.registerModel,
     (schemaPath) => {
-      required(schemaPath.username, { message: 'Username field is requiered!' });
-      required(schemaPath.email, { message: 'Email field is requiered!' });
-      required(schemaPath.password, { message: 'Password field is requiered!' });
+      required(schemaPath.username, { message: 'Username field is required!' });
+      maxLength(schemaPath.username, 100, { message: 'Username is too long!' });
+
+      required(schemaPath.email, { message: 'Email field is required!' });
+      email(schemaPath.email, { message: 'Email is invalid!' });
+      maxLength(schemaPath.email, 100, { message: 'Email is too long!' });
+
+      required(schemaPath.password, { message: 'Password field is required!' });
     },
-    { submission: { action: this.submitForm } },
+    { submission: { action: () => this.submitForm() } },
   );
 
   private async submitForm() {
-    console.log('Registered!');
+    console.log(this.registerInputs);
   }
 }

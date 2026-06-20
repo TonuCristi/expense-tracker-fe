@@ -10,7 +10,7 @@ import { AddWalletForm } from '../add-wallet-form/add-wallet-form';
   styleUrl: './add-wallet.css',
 })
 export class AddWallet {
-  public isFormOpen = signal<boolean>(false);
+  public readonly isFormOpen = signal<boolean>(false);
 
   public openForm() {
     this.isFormOpen.update((v) => !v);
