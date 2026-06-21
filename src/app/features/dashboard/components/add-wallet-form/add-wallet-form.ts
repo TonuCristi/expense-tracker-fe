@@ -42,7 +42,7 @@ export class AddWalletForm {
     },
     {
       submission: {
-        action: this.submitForm,
+        action: () => this.submitForm(),
       },
     },
   );
