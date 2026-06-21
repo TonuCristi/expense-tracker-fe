@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   form,
   required,
@@ -13,6 +13,7 @@ import {
 import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
+import { Auth } from '../../../core/auth/auth';
 
 const REGISTER_INPUTS = [
   {
@@ -53,10 +54,12 @@ interface RegisterFormModel {
 export class Register {
   public readonly registerInputs = REGISTER_INPUTS;
 
+  private readonly authService = inject(Auth);
+
   public readonly registerModel = signal<RegisterFormModel>({
-    username: '',
-    email: '',
-    password: '',
+    username: 'rest',
+    email: 'rest@rest.rest',
+    password: 'P@rola1234',
   });
 
   public readonly registerForm = form(
@@ -93,6 +96,8 @@ export class Register {
   );
 
   private async submitForm() {
-    console.log(this.registerInputs);
+    this.authService.register(this.registerForm().value()).subscribe((res) => {
+      console.log(res);
+    });
   }
 }
