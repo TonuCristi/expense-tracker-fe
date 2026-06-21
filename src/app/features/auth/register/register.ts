@@ -14,6 +14,7 @@ import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
 import { Auth } from '../../../core/auth/auth';
+import { AuthStore } from '../../../core/store/auth.store';
 
 const REGISTER_INPUTS = [
   {
@@ -55,6 +56,7 @@ export class Register {
   public readonly registerInputs = REGISTER_INPUTS;
 
   private readonly authService = inject(Auth);
+  private readonly authStore = inject(AuthStore);
 
   public readonly registerModel = signal<RegisterFormModel>({
     username: 'rest',
@@ -96,8 +98,9 @@ export class Register {
   );
 
   private async submitForm() {
-    this.authService.register(this.registerForm().value()).subscribe((res) => {
-      console.log(res);
-    });
+    console.log(this.authStore.user(), this.authStore.isLoading(), this.authStore.error());
+    // this.authService.register(this.registerForm().value()).subscribe((res) => {
+    //   console.log(res);
+    // });
   }
 }
