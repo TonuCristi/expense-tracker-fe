@@ -1,9 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { form, required, FormRoot, FormField } from '@angular/forms/signals';
+
+import { Button } from '../../../shared/ui/button/button';
+import { AuthCard } from '../components/auth-card/auth-card';
+import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
+import { Auth } from '../../../core/auth/auth';
+
+const LOGIN_INPUTS = [
+  {
+    id: 'email',
+    label: 'Email',
+    type: 'text',
+    name: 'email',
+    placeholder: 'Enter your email',
+  },
+  {
+    id: 'password',
+    label: 'Password',
+    type: 'password',
+    name: 'password',
+    placeholder: 'Enter your password',
+  },
+] as const;
+
+interface LoginFormModel {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [FormRoot, FormField, Button, AuthCard, AuthSwitchLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {}
+export class Login {
+  public readonly loginInputs = LOGIN_INPUTS;
+
+  private readonly authService = inject(Auth);
+
+  public readonly loginModel = signal<LoginFormModel>({
+    email: 'rest@rest.rest',
+    password: 'P@rola1234',
+  });
+
+  public readonly loginForm = form(
+    this.loginModel,
+    (schemaPath) => {
+      /* ----- Email validation ----- */
+      required(schemaPath.email, { message: 'Email field is required!' });
+
+      /* ----- Password validation ----- */
+      required(schemaPath.password, { message: 'Password field is required!' });
+    },
+    { submission: { action: () => this.submitForm() } },
+  );
+
+  private async submitForm() {
+    this.authService.login(this.loginForm().value()).subscribe((res) => {
+      console.log(res);
+    });
+  }
+}

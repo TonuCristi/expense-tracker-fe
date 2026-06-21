@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddWalletButton } from './add-wallet-button';
+import { AuthCard } from './auth-card';
 
-describe('AddWalletButton', () => {
-  let component: AddWalletButton;
-  let fixture: ComponentFixture<AddWalletButton>;
+describe('AuthCard', () => {
+  let component: AuthCard;
+  let fixture: ComponentFixture<AuthCard>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddWalletButton],
+      imports: [AuthCard],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AddWalletButton);
+    fixture = TestBed.createComponent(AuthCard);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

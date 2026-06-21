@@ -4,13 +4,13 @@ import { Button } from '../../../../shared/ui/button/button';
 import { AddWalletForm } from '../add-wallet-form/add-wallet-form';
 
 @Component({
-  selector: 'app-add-wallet-button',
+  selector: 'app-add-wallet',
   imports: [Button, AddWalletForm],
-  templateUrl: './add-wallet-button.html',
-  styleUrl: './add-wallet-button.css',
+  templateUrl: './add-wallet.html',
+  styleUrl: './add-wallet.css',
 })
-export class AddWalletButton {
-  public isFormOpen = signal<boolean>(false);
+export class AddWallet {
+  public readonly isFormOpen = signal<boolean>(false);
 
   public openForm() {
     this.isFormOpen.update((v) => !v);
