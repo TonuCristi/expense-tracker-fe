@@ -9,12 +9,15 @@ import {
   minLength,
   pattern,
 } from '@angular/forms/signals';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { catchError, finalize, of, tap } from 'rxjs';
 
 import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
 import { Auth } from '../../../core/auth/auth';
-import { AuthStore } from '../../../core/store/auth.store';
 
 const REGISTER_INPUTS = [
   {
@@ -56,7 +59,10 @@ export class Register {
   public readonly registerInputs = REGISTER_INPUTS;
 
   private readonly authService = inject(Auth);
-  private readonly authStore = inject(AuthStore);
+  private readonly router = inject(Router);
+
+  public readonly isLoading = signal<boolean>(false);
+  public readonly error = signal<string | null>(null);
 
   public readonly registerModel = signal<RegisterFormModel>({
     username: 'rest',
@@ -98,9 +104,22 @@ export class Register {
   );
 
   private async submitForm() {
-    console.log(this.authStore.user(), this.authStore.isLoading(), this.authStore.error());
-    // this.authService.register(this.registerForm().value()).subscribe((res) => {
-    //   console.log(res);
-    // });
+    this.isLoading.set(true);
+
+    this.authService
+      .register(this.registerForm().value())
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.error.set(error.error.message ?? 'Something went wrong!');
+          return of(null);
+        }),
+        tap((response) => {
+          if (response) {
+            this.router.navigate(['/']);
+          }
+        }),
+        finalize(() => this.isLoading.set(false)),
+      )
+      .subscribe();
   }
 }

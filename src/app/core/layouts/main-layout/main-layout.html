@@ -1,4 +1,12 @@
-<app-sidebar />
-<main class="h-full overflow-hidden">
-  <router-outlet />
-</main>
+@if (authStore.isLoading()) {
+  <div class="h-full flex items-center justify-center w-full">
+    <app-spinner />
+  </div>
+} @else {
+  <div class="h-full grid grid-cols-[auto_80fr] md:grid-cols-[20fr_80fr] p-4 gap-4 md:gap-8">
+    <app-sidebar />
+    <main class="h-full overflow-hidden">
+      <router-outlet />
+    </main>
+  </div>
+}

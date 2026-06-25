@@ -20,11 +20,15 @@
     }
 
     <div class="mb-2">
-      <app-button type="submit" [fullWidth]="true">Login</app-button>
+      <app-button type="submit" [disabled]="isLoading()" [fullWidth]="true">Login</app-button>
     </div>
   </form>
 
-  <div class="self-center">
+  @if (error()) {
+    <span class="text-xs text-red-500 font-semibold mt-1">{{ error() }}</span>
+  }
+
+  <div class="self-center mt-2">
     <app-auth-switch-link prompt="Don't have an account?" linkText="Register" route="/register" />
   </div>
 </app-auth-card>
