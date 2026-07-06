@@ -20,12 +20,14 @@
     }
 
     <div class="mb-2">
-      <app-button type="submit" [disabled]="isLoading()" [fullWidth]="true">Login</app-button>
+      <app-button type="submit" [disabled]="authStore.isLoading()" [fullWidth]="true"
+        >Login</app-button
+      >
     </div>
   </form>
 
-  @if (error()) {
-    <span class="text-xs text-red-500 font-semibold mt-1">{{ error() }}</span>
+  @if (authStore.error()) {
+    <span class="text-xs text-red-500 font-semibold mt-1">{{ authStore.error() }}</span>
   }
 
   <div class="self-center mt-2">

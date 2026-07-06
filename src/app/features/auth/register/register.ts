@@ -5,19 +5,15 @@ import {
   FormRoot,
   FormField,
   maxLength,
-  email,
   minLength,
   pattern,
 } from '@angular/forms/signals';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { catchError, finalize, of, tap } from 'rxjs';
 
 import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
-import { Auth } from '../../../core/auth/auth';
+import { AuthStore } from '../../../core/store/auth.store';
+import { emailValidators } from '../../../shared/validators/email.validators';
 
 const REGISTER_INPUTS = [
   {
@@ -58,11 +54,7 @@ interface RegisterFormModel {
 export class Register {
   public readonly registerInputs = REGISTER_INPUTS;
 
-  private readonly authService = inject(Auth);
-  private readonly router = inject(Router);
-
-  public readonly isLoading = signal<boolean>(false);
-  public readonly error = signal<string | null>(null);
+  public readonly authStore = inject(AuthStore);
 
   public readonly registerModel = signal<RegisterFormModel>({
     username: 'rest',
@@ -78,9 +70,7 @@ export class Register {
       maxLength(schemaPath.username, 100, { message: 'Username is too long!' });
 
       /* ----- Email validation ----- */
-      required(schemaPath.email, { message: 'Email field is required!' });
-      email(schemaPath.email, { message: 'Email is invalid!' });
-      maxLength(schemaPath.email, 100, { message: 'Email is too long!' });
+      emailValidators(schemaPath.email);
 
       /* ----- Password validation ----- */
       required(schemaPath.password, { message: 'Password field is required!' });
@@ -104,22 +94,6 @@ export class Register {
   );
 
   private async submitForm() {
-    this.isLoading.set(true);
-
-    this.authService
-      .register(this.registerForm().value())
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.error.set(error.error.message ?? 'Something went wrong!');
-          return of(null);
-        }),
-        tap((response) => {
-          if (response) {
-            this.router.navigate(['/']);
-          }
-        }),
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe();
+    this.authStore.register(this.registerForm().value());
   }
 }

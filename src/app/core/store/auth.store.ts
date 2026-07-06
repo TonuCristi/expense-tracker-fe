@@ -7,18 +7,20 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 
-import { User } from '../auth/auth.models';
+import { LoginPayload, RegisterPayload, User } from '../auth/auth.models';
 import { Auth } from '../auth/auth';
 
 interface AuthState {
   user: User | null;
   isLoading: boolean;
+  isAuthChecked: boolean;
   error: string | null;
 }
 
 const initialState: AuthState = {
   user: null,
-  isLoading: true,
+  isLoading: false,
+  isAuthChecked: false,
   error: null,
 };
 
@@ -27,20 +29,61 @@ export const AuthStore = signalStore(
   withState(initialState),
   withComputed(({ user }) => ({ isAuthenticated: computed(() => !!user()) })),
   withMethods((store, authService = inject(Auth), router = inject(Router)) => ({
-    getMe: rxMethod<void>(
+    register: rxMethod<RegisterPayload>(
       pipe(
-        switchMap(() => {
-          return authService.getMe().pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap((userPayload) => {
+          return authService.register(userPayload).pipe(
             tapResponse({
-              next: (user) => patchState(store, { user, isLoading: false }),
+              next: (res) => {
+                patchState(store, { user: res.user, isLoading: false, error: null });
+                router.navigate(['/']);
+              },
               error: (error: HttpErrorResponse) => {
                 patchState(store, {
                   user: null,
                   isLoading: false,
                   error: error.error.message ?? 'Something went wrong!',
                 });
-
-                router.navigate(['/login']);
+              },
+            }),
+          );
+        }),
+      ),
+    ),
+    login: rxMethod<LoginPayload>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true })),
+        switchMap((userPayload) => {
+          return authService.login(userPayload).pipe(
+            tapResponse({
+              next: (res) => {
+                patchState(store, { user: res.user, isLoading: false, error: null });
+                router.navigate(['/']);
+              },
+              error: (error: HttpErrorResponse) => {
+                patchState(store, {
+                  user: null,
+                  isLoading: false,
+                  error: error.error.message ?? 'Something went wrong!',
+                });
+              },
+            }),
+          );
+        }),
+      ),
+    ),
+    getMe: rxMethod<void>(
+      pipe(
+        switchMap(() => {
+          return authService.getMe().pipe(
+            tapResponse({
+              next: (user) => patchState(store, { user, isAuthChecked: true }),
+              error: () => {
+                patchState(store, {
+                  user: null,
+                  isAuthChecked: true,
+                });
               },
             }),
           );

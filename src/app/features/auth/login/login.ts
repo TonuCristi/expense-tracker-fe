@@ -1,14 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { form, required, FormRoot, FormField, email, maxLength } from '@angular/forms/signals';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-
-import { catchError, finalize, of, tap } from 'rxjs';
+import { form, required, FormRoot, FormField } from '@angular/forms/signals';
 
 import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
-import { Auth } from '../../../core/auth/auth';
+import { AuthStore } from '../../../core/store/auth.store';
+import { emailValidators } from '../../../shared/validators/email.validators';
 
 const LOGIN_INPUTS = [
   {
@@ -41,11 +38,7 @@ interface LoginFormModel {
 export class Login {
   public readonly loginInputs = LOGIN_INPUTS;
 
-  private readonly authService = inject(Auth);
-  private readonly router = inject(Router);
-
-  public readonly isLoading = signal<boolean>(false);
-  public readonly error = signal<string | null>(null);
+  public readonly authStore = inject(AuthStore);
 
   public readonly loginModel = signal<LoginFormModel>({
     email: 'rest@rest.rest',
@@ -56,9 +49,7 @@ export class Login {
     this.loginModel,
     (schemaPath) => {
       /* ----- Email validation ----- */
-      required(schemaPath.email, { message: 'Email field is required!' });
-      email(schemaPath.email, { message: 'Email is invalid!' });
-      maxLength(schemaPath.email, 100, { message: 'Email is too long!' });
+      emailValidators(schemaPath.email);
 
       /* ----- Password validation ----- */
       required(schemaPath.password, { message: 'Password field is required!' });
@@ -67,22 +58,6 @@ export class Login {
   );
 
   private async submitForm() {
-    this.isLoading.set(true);
-
-    this.authService
-      .login(this.loginForm().value())
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.error.set(error.error.message ?? 'Something went wrong!');
-          return of(null);
-        }),
-        tap((response) => {
-          if (response) {
-            this.router.navigate(['/']);
-          }
-        }),
-        finalize(() => this.isLoading.set(false)),
-      )
-      .subscribe();
+    this.authStore.login(this.loginForm().value());
   }
 }

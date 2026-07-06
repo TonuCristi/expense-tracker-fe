@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { MainLayout } from './core/layouts/main-layout/main-layout';
 import { AuthLayout } from './core/layouts/auth-layout/auth-layout';
 import { authGuard } from './core/auth/auth-guard';
+import { noAuthGuard } from './core/auth/noauth-guard';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayout,
+    canActivate: [noAuthGuard],
     loadChildren: () => import('./features/auth/auth.routes').then((m) => m.authRoutes),
   },
 ];

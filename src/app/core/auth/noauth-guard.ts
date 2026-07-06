@@ -5,11 +5,11 @@ import { filter, map, take } from 'rxjs';
 
 import { AuthStore } from '../store/auth.store';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const noAuthGuard: CanActivateFn = (route, state) => {
   const authStore = inject(AuthStore);
   const router = inject(Router);
 
-  const decide = () => authStore.isAuthenticated() || router.createUrlTree(['/login']);
+  const decide = () => !authStore.isAuthenticated() || router.createUrlTree(['/']);
 
   if (authStore.isAuthChecked()) {
     return decide();

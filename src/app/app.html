@@ -1,1 +1,7 @@
-<router-outlet />
+@if (!authStore.isAuthChecked()) {
+  <div class="h-screen flex items-center justify-center w-full">
+    <app-spinner />
+  </div>
+} @else {
+  <router-outlet />
+}
