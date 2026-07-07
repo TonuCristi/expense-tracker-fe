@@ -1,4 +1,4 @@
-<aside>
+<aside class="p-4 border-r border-border h-full flex flex-col">
   <a routerLink="/" class="font-bold text-2xl mb-4 inline-block px-2">
     <span class="hidden md:block">Trackr.</span>
     <span class="block md:hidden">T.</span>
@@ -9,7 +9,7 @@
       <a
         [routerLink]="navLink.path"
         routerLinkActive="nav-link-active"
-        class="p-2 hover:bg-zinc-900 active:bg-zinc-900 rounded-md text-zinc-100 transition-all font-semibold flex items-center justify-center md:justify-normal gap-4"
+        class="p-2 hover:bg-primary active:bg-primary rounded-md text-primary-foreground transition-all font-semibold flex items-center justify-center md:justify-normal gap-4"
       >
         <i [class]="navLink.iconClass"></i>
         <span class="hidden md:block">
@@ -18,4 +18,16 @@
       </a>
     }
   </nav>
+
+  <div class="mt-auto border-t border-border pt-4 flex gap-2">
+    <div
+      class="h-10 w-10 bg-surface rounded-full flex items-center justify-center uppercase font-semibold"
+    >
+      {{ userInitials() }}
+    </div>
+    <div class="flex flex-col">
+      <span class="font-semibold">{{ authStore.user()?.username }}</span>
+      <span class="text-xs text-foreground-muted">{{ authStore.user()?.email }}</span>
+    </div>
+  </div>
 </aside>

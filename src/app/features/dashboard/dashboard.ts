@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+
 import { PageTitle } from '../../shared/ui/page-title/page-title';
 import { WalletsCarousel } from './components/wallets-carousel/wallets-carousel';
-import { AddWalletButton } from './components/add-wallet-button/add-wallet-button';
+import { AddWallet } from './components/add-wallet/add-wallet';
 import { LastTransactionsList } from './components/last-transactions-list/last-transactions-list';
 import { TotalBalance } from './components/total-balance/total-balance';
 import { SubscriptionsList } from './components/subscriptions-list/subscriptions-list';
@@ -11,7 +12,7 @@ import { SubscriptionsList } from './components/subscriptions-list/subscriptions
   imports: [
     PageTitle,
     WalletsCarousel,
-    AddWalletButton,
+    AddWallet,
     LastTransactionsList,
     TotalBalance,
     SubscriptionsList,

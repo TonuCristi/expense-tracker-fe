@@ -19,9 +19,9 @@ interface AddWalletFormModel {
   styleUrl: './add-wallet-form.css',
 })
 export class AddWalletForm {
-  public isFormOpen = model<boolean>(false);
+  public readonly isFormOpen = model<boolean>(false);
 
-  public addWalletModel = signal<AddWalletFormModel>({
+  public readonly addWalletModel = signal<AddWalletFormModel>({
     name: '',
     currency: 'eur',
     balance: 0,
@@ -29,7 +29,7 @@ export class AddWalletForm {
 
   public readonly currencyOptions = CURRENCY_OPTIONS;
 
-  public addWalletForm = form(
+  public readonly addWalletForm = form(
     this.addWalletModel,
     (schemaPath) => {
       required(schemaPath.name, { message: 'Name field is required!' });
@@ -42,7 +42,7 @@ export class AddWalletForm {
     },
     {
       submission: {
-        action: this.submitForm,
+        action: () => this.submitForm(),
       },
     },
   );
@@ -51,7 +51,7 @@ export class AddWalletForm {
     this.isFormOpen.set(false);
   }
 
-  public async submitForm() {
+  private async submitForm() {
     console.log('Wallet added!');
   }
 }
