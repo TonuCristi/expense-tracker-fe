@@ -1,5 +1,5 @@
 <app-auth-card title="Create an account!" subtitle="Watch your spending, grow your savings.">
-  <form [formRoot]="registerForm" class="flex flex-col gap-4">
+  <form [formRoot]="registerForm" class="flex flex-col gap-4 mb-2">
     @for (input of registerInputs; track input.name) {
       <div class="flex flex-col gap-1">
         <label [for]="input.id" class="text-xs font-semibold text-foreground-muted">{{
@@ -19,12 +19,16 @@
       </div>
     }
 
-    <div class="mb-2">
-      <app-button type="submit" [fullWidth]="true">Register</app-button>
-    </div>
+    <app-button type="submit" [disabled]="authStore.isLoading()" [fullWidth]="true"
+      >Register</app-button
+    >
   </form>
 
-  <div class="self-center">
+  @if (authStore.error()) {
+    <span class="text-xs text-red-500 font-semibold mt-1">{{ authStore.error() }}</span>
+  }
+
+  <div class="self-center mt-2">
     <app-auth-switch-link prompt="Already have an account?" linkText="Login" route="/login" />
   </div>
 </app-auth-card>

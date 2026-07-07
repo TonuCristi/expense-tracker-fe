@@ -1,9 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
 
-type Variant = 'primary' | 'secondary' | 'empty';
-
-type Type = 'button' | 'submit' | 'reset';
-
 const VARIANT_STYLES: Record<Variant, string> = {
   primary:
     'p-2 bg-primary-foreground hover:bg-inverse-hover active:inverse-active disabled:bg-inverse-disabled rounded-md text-primary',
@@ -11,6 +7,10 @@ const VARIANT_STYLES: Record<Variant, string> = {
     'p-2 bg-primary hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled rounded-md text-primary-foreground',
   empty: '',
 };
+
+type Variant = 'primary' | 'secondary' | 'empty';
+
+type Type = 'button' | 'submit' | 'reset';
 
 @Component({
   selector: 'app-button',

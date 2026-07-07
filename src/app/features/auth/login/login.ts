@@ -4,7 +4,8 @@ import { form, required, FormRoot, FormField } from '@angular/forms/signals';
 import { Button } from '../../../shared/ui/button/button';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
-import { Auth } from '../../../core/auth/auth';
+import { AuthStore } from '../../../core/store/auth.store';
+import { emailValidators } from '../../../shared/validators/email.validators';
 
 const LOGIN_INPUTS = [
   {
@@ -37,7 +38,7 @@ interface LoginFormModel {
 export class Login {
   public readonly loginInputs = LOGIN_INPUTS;
 
-  private readonly authService = inject(Auth);
+  public readonly authStore = inject(AuthStore);
 
   public readonly loginModel = signal<LoginFormModel>({
     email: 'rest@rest.rest',
@@ -48,7 +49,7 @@ export class Login {
     this.loginModel,
     (schemaPath) => {
       /* ----- Email validation ----- */
-      required(schemaPath.email, { message: 'Email field is required!' });
+      emailValidators(schemaPath.email);
 
       /* ----- Password validation ----- */
       required(schemaPath.password, { message: 'Password field is required!' });
@@ -57,8 +58,6 @@ export class Login {
   );
 
   private async submitForm() {
-    this.authService.login(this.loginForm().value()).subscribe((res) => {
-      console.log(res);
-    });
+    this.authStore.login(this.loginForm().value());
   }
 }

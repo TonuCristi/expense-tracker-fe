@@ -3,22 +3,28 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { LoginPayload, RegisterPayload, User } from './auth.models';
-import { environment } from '../../../environments/environment.development';
-import { AuthStore } from '../store/auth.store';
+import { AuthResponse, LoginPayload, RegisterPayload, User } from './auth.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
   private readonly http = inject(HttpClient);
-  private readonly authStore = inject(AuthStore);
 
-  public register(userPayload: RegisterPayload): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/register`, userPayload);
+  public register(userPayload: RegisterPayload): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/register`, userPayload);
   }
 
-  public login(userPayload: LoginPayload): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/auth/login`, userPayload);
+  public login(userPayload: LoginPayload): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, userPayload);
+  }
+
+  public getMe(): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/auth/me`);
+  }
+
+  public logout(): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/logout`, null);
   }
 }
