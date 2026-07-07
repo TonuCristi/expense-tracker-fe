@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { PageTitle } from '../../shared/ui/page-title/page-title';
 import { WalletsCarousel } from './components/wallets-carousel/wallets-carousel';
 import { AddWallet } from './components/add-wallet/add-wallet';
-import { LastTransactionsList } from './components/last-transactions-list/last-transactions-list';
-import { TotalBalance } from './components/total-balance/total-balance';
-import { SubscriptionsList } from './components/subscriptions-list/subscriptions-list';
+import { SpendingOverview } from './components/spending-overview/spending-overview';
+import { TransactionCard } from './components/transaction-card/transaction-card';
+import { TopSpendingCategories } from './components/top-spending-categories/top-spending-categories';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +13,9 @@ import { SubscriptionsList } from './components/subscriptions-list/subscriptions
     PageTitle,
     WalletsCarousel,
     AddWallet,
-    LastTransactionsList,
-    TotalBalance,
-    SubscriptionsList,
+    SpendingOverview,
+    TransactionCard,
+    TopSpendingCategories,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
