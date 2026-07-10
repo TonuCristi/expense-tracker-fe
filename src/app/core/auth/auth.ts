@@ -12,19 +12,21 @@ import { environment } from '../../../environments/environment';
 export class Auth {
   private readonly http = inject(HttpClient);
 
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
+
   public register(userPayload: RegisterPayload): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/register`, userPayload);
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, userPayload);
   }
 
   public login(userPayload: LoginPayload): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, userPayload);
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, userPayload);
   }
 
   public getMe(): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/auth/me`);
+    return this.http.get<User>(`${this.apiUrl}/me`);
   }
 
   public logout(): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/logout`, null);
+    return this.http.post<AuthResponse>(`${this.apiUrl}/logout`, null);
   }
 }

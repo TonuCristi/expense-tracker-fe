@@ -1,0 +1,10 @@
+<button
+  (click)="openForm()"
+  class="border-border text-foreground-muted flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed p-4"
+>
+  <i class="pi pi-plus text-lg"></i>
+  <span class="font-semibold">Add a new wallet</span>
+</button>
+@if (isFormOpen()) {
+  <app-add-wallet-form [(isFormOpen)]="isFormOpen" />
+}

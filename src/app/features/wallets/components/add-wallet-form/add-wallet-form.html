@@ -1,5 +1,7 @@
-<div class="bg-surface/70 fixed inset-0 flex h-dvh w-full items-center justify-center p-4">
-  <div class="bg-background w-sm rounded-md p-4">
+<div
+  class="bg-background/80 fixed inset-0 flex h-dvh w-full items-center justify-center p-4 backdrop-blur-xs"
+>
+  <div class="bg-background border-border w-sm rounded-md border p-4">
     <div class="border-border mb-4 flex items-center justify-between gap-4 border-b pb-2">
       <h2 class="text-lg font-semibold">Add wallet</h2>
       <app-button variant="empty" (clicked)="closeForm()">
@@ -13,6 +15,7 @@
         <input
           id="name"
           type="text"
+          placeholder="e.g. Cash, Nova Bank"
           [formField]="addWalletForm.name"
           class="border-border rounded-md border p-2"
         />
@@ -58,7 +61,12 @@
         }
       </div>
 
-      <app-button type="submit" [fullWidth]="true">Save</app-button>
+      <div class="grid grid-cols-2 gap-4">
+        <app-button type="button" variant="secondary" [fullWidth]="true" (clicked)="closeForm()"
+          >Cancel</app-button
+        >
+        <app-button type="submit" [fullWidth]="true">Add wallet</app-button>
+      </div>
     </form>
   </div>
 </div>

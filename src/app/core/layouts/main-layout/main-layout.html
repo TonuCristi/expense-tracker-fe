@@ -1,6 +1,14 @@
-<div class="grid h-full grid-cols-[auto_80fr] gap-4 overflow-y-auto md:grid-cols-[25fr_75fr]">
+<div
+  class="grid h-full grid-cols-[auto_80fr] overflow-hidden md:grid-cols-[25fr_75fr] lg:grid-cols-[15rem_auto] xl:lg:grid-cols-[20rem_auto]"
+>
   <app-sidebar />
-  <main class="h-full overflow-hidden p-4">
-    <router-outlet />
-  </main>
+  @if (walletsStore.isLoading()) {
+    <div class="flex h-full items-center justify-center">
+      <app-spinner />
+    </div>
+  } @else {
+    <main class="h-full overflow-y-auto px-4 py-4 md:px-8">
+      <router-outlet />
+    </main>
+  }
 </div>

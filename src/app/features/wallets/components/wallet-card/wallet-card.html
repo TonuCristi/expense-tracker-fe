@@ -1,13 +1,20 @@
-<div class="border border-border p-4 rounded-md bg-primary">
-  <div class="bg-surface rounded-md font-bold w-10 h-10 flex items-center justify-center mb-4">
-    C
+<div class="border-border bg-primary h-full rounded-md border p-4">
+  <div class="mb-4 flex items-center justify-between gap-4">
+    <div class="bg-surface flex h-10 w-10 items-center justify-center rounded-md font-bold">
+      {{ wallet().name[0] }}
+    </div>
+    <app-button
+      variant="empty"
+      class="text-foreground-muted hover:bg-surface flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all"
+    >
+      <i class="pi pi-ellipsis-h"></i>
+    </app-button>
   </div>
-  <h2 class="font-semibold text-base">Cash</h2>
-  <p class="text-foreground-muted mb-4">Cash wallet</p>
+  <h2 class="mb-4 text-base font-semibold">{{ wallet().name }}</h2>
 
-  <p class="font-bold text-lg md:text-xl lg:text-2xl mb-4">1250.5 EUR</p>
+  <p class="mb-4 text-lg font-bold md:text-xl lg:text-2xl">{{ wallet().balance }} EUR</p>
 
-  <div class="pt-4 border-t border-border flex items-center justify-between">
+  <div class="border-border flex items-center justify-between border-t pt-4">
     <p class="text-foreground-muted">42 transactions</p>
     <p class="font-semibold text-green-500">+2.4%</p>
   </div>

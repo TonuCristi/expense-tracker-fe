@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+
+import { Button } from '../../../../shared/ui/button/button';
+import { Wallet } from '../../../../core/wallets/wallet.models';
 
 @Component({
   selector: 'app-wallet-card',
-  imports: [],
+  imports: [Button],
   templateUrl: './wallet-card.html',
   styleUrl: './wallet-card.css',
 })
-export class WalletCard {}
+export class WalletCard {
+  public readonly wallet = input.required<Wallet>();
+}

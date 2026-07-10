@@ -1,5 +1,5 @@
 @reference 'tailwindcss';
 
 :host {
-  @apply h-dvh flex flex-col;
+  @apply flex h-dvh flex-col;
 }

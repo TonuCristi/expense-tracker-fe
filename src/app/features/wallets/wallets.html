@@ -4,9 +4,10 @@
   </div>
   <app-combined-balance />
 </header>
-<section class="grid grid-cols-3 gap-4">
-  <app-wallet-card />
-  <app-wallet-card />
-  <app-wallet-card />
-  <app-wallet-card />
+
+<section class="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+  @for (wallet of walletsStore.wallets(); track wallet.id) {
+    <app-wallet-card [wallet]="wallet" />
+  }
+  <app-add-wallet />
 </section>
