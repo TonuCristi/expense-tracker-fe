@@ -1,6 +1,6 @@
-<div class="w-full h-dvh fixed inset-0 bg-surface/70 flex items-center justify-center p-4">
-  <div class="bg-background rounded-md p-4 w-sm">
-    <div class="flex gap-4 items-center justify-between border-b border-border mb-4 pb-2">
+<div class="bg-surface/70 fixed inset-0 flex h-dvh w-full items-center justify-center p-4">
+  <div class="bg-background w-sm rounded-md p-4">
+    <div class="border-border mb-4 flex items-center justify-between gap-4 border-b pb-2">
       <h2 class="text-lg font-semibold">Add wallet</h2>
       <app-button variant="empty" (clicked)="closeForm()">
         <i class="pi pi-times"></i>
@@ -9,26 +9,26 @@
 
     <form [formRoot]="addWalletForm" class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <label for="name" class="text-xs font-semibold text-foreground-muted">Name</label>
+        <label for="name" class="text-foreground-muted text-xs font-semibold">Name</label>
         <input
           id="name"
           type="text"
           [formField]="addWalletForm.name"
-          class="rounded-md p-2 border border-border"
+          class="border-border rounded-md border p-2"
         />
         @if (addWalletForm.name().invalid() && addWalletForm.name().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{
-            addWalletForm.name().errors()[0].message
-          }}</span>
+          <p class="text-xs font-semibold text-red-500">
+            {{ addWalletForm.name().errors()[0].message }}
+          </p>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label for="currency" class="text-xs font-semibold text-foreground-muted">Currency</label>
+        <label for="currency" class="text-foreground-muted text-xs font-semibold">Currency</label>
         <select
           id="currency"
           [formField]="addWalletForm.currency"
-          class="rounded-md p-2 border border-border bg-background"
+          class="border-border bg-background rounded-md border p-2"
         >
           @for (option of currencyOptions; track option.value) {
             <option [value]="option.value" class="text-primary-foreground">
@@ -37,24 +37,24 @@
           }
         </select>
         @if (addWalletForm.currency().invalid() && addWalletForm.currency().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{
-            addWalletForm.currency().errors()[0].message
-          }}</span>
+          <p class="text-xs font-semibold text-red-500">
+            {{ addWalletForm.currency().errors()[0].message }}
+          </p>
         }
       </div>
 
       <div class="flex flex-col gap-1">
-        <label for="balance" class="text-xs font-semibold text-foreground-muted">Balance</label>
+        <label for="balance" class="text-foreground-muted text-xs font-semibold">Balance</label>
         <input
           id="balance"
           type="number"
           [formField]="addWalletForm.balance"
-          class="rounded-md p-2 border border-border"
+          class="border-border rounded-md border p-2"
         />
         @if (addWalletForm.balance().invalid() && addWalletForm.balance().touched()) {
-          <span class="text-xs text-red-500 font-semibold">{{
-            addWalletForm.balance().errors()[0].message
-          }}</span>
+          <p class="text-xs font-semibold text-red-500">
+            {{ addWalletForm.balance().errors()[0].message }}
+          </p>
         }
       </div>
 

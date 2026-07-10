@@ -30,5 +30,5 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply rounded-sm bg-inverse;
+  @apply rounded-sm bg-primary;
 }

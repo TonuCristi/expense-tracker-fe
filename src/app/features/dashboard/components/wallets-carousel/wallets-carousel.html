@@ -1,13 +1,13 @@
 <div class="flex gap-4 overflow-x-auto pb-2">
   @for (wallet of wallets; track wallet.name) {
     <div
-      class="bg-primary rounded-md p-2 sm:p-4 shrink-0 w-52 lg:w-3xs hover:bg-primary-hover active:bg-primary-active transition-all cursor-pointer"
+      class="bg-primary hover:bg-primary-hover active:bg-primary-active border-border w-52 shrink-0 cursor-pointer rounded-md border p-2 transition-all sm:p-4 lg:w-3xs"
     >
       <div class="text-foreground-muted mb-1 flex items-center justify-between gap-4">
-        <h3 class="font-semibold">{{ wallet.name }}</h3>
+        <h2 class="font-semibold">{{ wallet.name }}</h2>
         <i class="pi pi-money-bill"></i>
       </div>
-      <span class="font-bold text-lg md:text-xl lg:text-2xl"
+      <span class="text-lg font-bold md:text-xl lg:text-2xl"
         >{{ wallet.balance }} {{ wallet.currency }}</span
       >
     </div>

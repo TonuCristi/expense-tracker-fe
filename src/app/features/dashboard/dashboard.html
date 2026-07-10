@@ -1,5 +1,17 @@
-<header class="flex justify-between items-center gap-8 mb-4">
+<header class="mb-4 flex items-center justify-between gap-8">
   <app-page-title />
   <app-add-wallet />
 </header>
-<app-wallets-carousel />
+
+<section class="mb-8">
+  <app-wallets-carousel />
+</section>
+
+<section
+  class="grid grid-cols-5 grid-rows-3 gap-4 overflow-y-auto [&>*:last-child]:col-span-2 [&>*:last-child]:row-span-2 [&>*:nth-child(1)]:col-span-3 [&>*:nth-child(1)]:row-span-3"
+>
+  <app-spending-overview />
+  <app-transaction-card />
+  <app-transaction-card />
+  <app-top-spending-categories />
+</section>
