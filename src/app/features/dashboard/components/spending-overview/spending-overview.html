@@ -1,0 +1,19 @@
+<div class="border-border bg-primary rounded-md border p-4">
+  <div class="text-foreground-muted mb-1 flex items-center justify-between gap-4">
+    <h2 class="font-semibold">Spending overview</h2>
+    <div class="border-border rounded-2xl border px-2 py-1">Last 6 months</div>
+  </div>
+
+  <div class="mb-8 text-lg font-bold md:text-xl lg:text-2xl">1250.5 EUR</div>
+
+  <div class="flex h-52 items-end justify-around">
+    @for (spending of spendings; track spending.month) {
+      <div class="flex h-full flex-col items-center justify-end gap-1">
+        <div class="w-10 rounded-md bg-white" [style.height]="`${spending.value}%`"></div>
+        <div class="text-foreground-muted text-xs capitalize">
+          {{ spending.month }}
+        </div>
+      </div>
+    }
+  </div>
+</div>

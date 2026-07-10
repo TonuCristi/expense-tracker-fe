@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
 import { AuthStore } from '../../../core/store/auth.store';
 import { getInitials } from '../../utils/string.utils';
 
