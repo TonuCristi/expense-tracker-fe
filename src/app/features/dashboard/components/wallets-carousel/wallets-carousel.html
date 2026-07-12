@@ -1,5 +1,5 @@
 <div class="flex gap-4 overflow-x-auto pb-2">
-  @for (wallet of wallets; track wallet.name) {
+  @for (wallet of walletsStore.wallets(); track wallet.id) {
     <div
       class="bg-primary hover:bg-primary-hover active:bg-primary-active border-border w-52 shrink-0 cursor-pointer rounded-md border p-2 transition-all sm:p-4 lg:w-3xs"
     >

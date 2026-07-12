@@ -4,8 +4,8 @@ const VARIANT_STYLES: Record<Variant, string> = {
   primary:
     'p-2 bg-primary-foreground hover:bg-inverse-hover active:inverse-active disabled:bg-inverse-disabled rounded-md text-primary',
   secondary:
-    'p-2 bg-primary hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled rounded-md text-primary-foreground',
-  empty: '',
+    'p-2 bg-primary hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled rounded-md text-primary-foreground border border-border',
+  empty: 'flex items-center justify-center',
 };
 
 type Variant = 'primary' | 'secondary' | 'empty';
