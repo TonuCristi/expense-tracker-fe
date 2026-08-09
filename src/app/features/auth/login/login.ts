@@ -41,8 +41,8 @@ export class Login {
   public readonly authStore = inject(AuthStore);
 
   public readonly loginModel = signal<LoginFormModel>({
-    email: 'rest@rest.rest',
-    password: 'P@rola1234',
+    email: 'tcg@tcgb.tcgb',
+    password: 'Tonu2002@',
   });
 
   public readonly loginForm = form(

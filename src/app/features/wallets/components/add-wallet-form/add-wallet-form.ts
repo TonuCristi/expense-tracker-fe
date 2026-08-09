@@ -2,24 +2,25 @@ import { Component, inject, model, signal } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, min, required } from '@angular/forms/signals';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { CURRENCY } from '../../../../core/wallets/wallet.models';
 import { CURRENCY_OPTIONS } from '../../../../shared/constants';
+import { Overlay } from '../../../../shared/ui/overlay/overlay';
 import { WalletsStore } from '../../../../core/store/wallets.store';
+import { Currency } from '../../../../shared/models';
 
 interface AddWalletFormModel {
   name: string;
-  currency: CURRENCY;
+  currency: Currency;
   balance: number;
 }
 
 @Component({
   selector: 'app-add-wallet-form',
-  imports: [Button, FormField, FormRoot],
+  imports: [Button, FormField, FormRoot, Overlay],
   templateUrl: './add-wallet-form.html',
   styleUrl: './add-wallet-form.css',
 })
 export class AddWalletForm {
-  private readonly walletsStore = inject(WalletsStore);
+  public readonly walletsStore = inject(WalletsStore);
 
   public readonly isFormOpen = model<boolean>(false);
 
@@ -41,7 +42,6 @@ export class AddWalletForm {
 
       required(schemaPath.currency, { message: 'The currency field is required!' });
 
-      // required(schemaPath.balance, { message: 'Balance field is required!' });
       min(schemaPath.balance, 0, { message: 'The balance must be at least 0!' });
     },
     {

@@ -3,7 +3,12 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { AddWalletPayload, AddWalletResponse, GetWalletsResponse } from './wallet.models';
+import {
+  AddWalletPayload,
+  AddWalletResponse,
+  GetWalletsResponse,
+  MessageResponse,
+} from './wallet.models';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -13,7 +18,11 @@ export class Wallets {
   private readonly apiUrl = `${environment.apiUrl}/wallets`;
 
   public addWallet(walletPayload: AddWalletPayload): Observable<AddWalletResponse> {
-    return this.http.post<AddWalletResponse>(`${this.apiUrl}`, walletPayload);
+    return this.http.post<AddWalletResponse>(this.apiUrl, walletPayload);
+  }
+
+  public deleteWallet(walletId: string): Observable<MessageResponse> {
+    return this.http.delete<MessageResponse>(`${this.apiUrl}/${walletId}`);
   }
 
   public getWallets(): Observable<GetWalletsResponse> {

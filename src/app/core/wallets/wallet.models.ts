@@ -1,15 +1,16 @@
-import { CURRENCY_OPTIONS } from '../../shared/constants';
-
-export type CURRENCY = (typeof CURRENCY_OPTIONS)[number]['value'];
+import { Currency } from '../../shared/models';
 
 export interface AddWalletPayload {
   name: string;
-  currency: CURRENCY;
+  currency: Currency;
   balance: number;
 }
 
-export interface AddWalletResponse {
+export interface AddWalletResponse extends MessageResponse {
   wallet: Wallet;
+}
+
+export interface MessageResponse {
   message: string;
 }
 
@@ -20,7 +21,7 @@ export interface GetWalletsResponse {
 export interface Wallet {
   id: string;
   name: string;
-  currency: CURRENCY;
+  currency: Currency;
   balance: number;
   createdAt: string;
 }

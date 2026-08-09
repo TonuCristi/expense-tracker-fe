@@ -57,9 +57,9 @@ export class Register {
   public readonly authStore = inject(AuthStore);
 
   public readonly registerModel = signal<RegisterFormModel>({
-    username: 'rest',
-    email: 'rest@rest.rest',
-    password: 'P@rola1234',
+    username: '',
+    email: '',
+    password: '',
   });
 
   public readonly registerForm = form(

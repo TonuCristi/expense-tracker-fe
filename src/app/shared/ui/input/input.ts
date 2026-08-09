@@ -9,7 +9,6 @@ const VARIANT_STYLES: Record<Variant, string> = {
 
 @Component({
   selector: 'app-input',
-  imports: [],
   templateUrl: './input.html',
   styleUrl: './input.css',
 })
