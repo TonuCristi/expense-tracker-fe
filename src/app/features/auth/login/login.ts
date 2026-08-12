@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { form, required, FormRoot, FormField } from '@angular/forms/signals';
 
 import { Button } from '../../../shared/ui/button/button';
+import { Input } from '../../../shared/ui/input/input';
 import { AuthCard } from '../components/auth-card/auth-card';
 import { AuthSwitchLink } from '../components/auth-switch-link/auth-switch-link';
 import { AuthStore } from '../../../core/store/auth.store';
@@ -31,7 +32,7 @@ interface LoginFormModel {
 
 @Component({
   selector: 'app-login',
-  imports: [FormRoot, FormField, Button, AuthCard, AuthSwitchLink],
+  imports: [FormRoot, FormField, Button, AuthCard, AuthSwitchLink, Input],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

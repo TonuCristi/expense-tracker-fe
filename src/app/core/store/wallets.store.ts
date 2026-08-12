@@ -1,8 +1,8 @@
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { pipe, switchMap, tap } from 'rxjs';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 
@@ -25,6 +25,10 @@ const initialState: WalletsState = {
 
 export const WalletsStore = signalStore(
   withState(initialState),
+  withComputed(({ wallets }) => ({
+    walletsCount: computed(() => wallets().length),
+    combinedBalance: computed(() => wallets().reduce((acc, wallet) => acc + wallet.balance, 0)),
+  })),
   withMethods((store, walletsService = inject(Wallets)) => ({
     addWallet: rxMethod<AddWalletPayload>(
       pipe(

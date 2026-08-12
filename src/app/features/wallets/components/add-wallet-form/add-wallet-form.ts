@@ -2,9 +2,10 @@ import { Component, inject, model, signal } from '@angular/core';
 import { form, FormField, FormRoot, maxLength, min, required } from '@angular/forms/signals';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { CURRENCY_OPTIONS } from '../../../../shared/constants';
 import { Overlay } from '../../../../shared/ui/overlay/overlay';
+import { Input } from '../../../../shared/ui/input/input';
 import { WalletsStore } from '../../../../core/store/wallets.store';
+import { CURRENCY_OPTIONS } from '../../../../shared/constants';
 import { Currency } from '../../../../shared/models';
 
 interface AddWalletFormModel {
@@ -15,7 +16,7 @@ interface AddWalletFormModel {
 
 @Component({
   selector: 'app-add-wallet-form',
-  imports: [Button, FormField, FormRoot, Overlay],
+  imports: [Button, FormField, FormRoot, Overlay, Input],
   templateUrl: './add-wallet-form.html',
   styleUrl: './add-wallet-form.css',
 })

@@ -10,12 +10,12 @@
     <form [formRoot]="addWalletForm" class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
         <label for="name" class="text-foreground-muted text-xs font-semibold">Name</label>
-        <input
+        <app-input
           id="name"
           type="text"
           placeholder="e.g. Cash, Nova Bank"
+          [fullWidth]="true"
           [formField]="addWalletForm.name"
-          class="border-border rounded-md border p-2"
         />
         @if (addWalletForm.name().invalid() && addWalletForm.name().touched()) {
           <p class="text-xs font-semibold text-red-500">
@@ -52,6 +52,13 @@
           [formField]="addWalletForm.balance"
           class="border-border rounded-md border p-2"
         />
+
+        <!-- <app-input
+          id="balance"
+          type="number"
+          [fullWidth]="true"
+          [formField]="addWalletForm.balance"
+        /> -->
         @if (addWalletForm.balance().invalid() && addWalletForm.balance().touched()) {
           <p class="text-xs font-semibold text-red-500">
             {{ addWalletForm.balance().errors()[0].message }}

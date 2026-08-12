@@ -4,4 +4,7 @@
   [name]="name()"
   [disabled]="disabled()"
   [placeholder]="placeholder()"
+  [class]="styles()"
+  [value]="value()"
+  (input)="value.set($event.target.value)"
 />

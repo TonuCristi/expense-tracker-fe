@@ -4,7 +4,7 @@ import { FormValueControl } from '@angular/forms/signals';
 type Variant = 'primary';
 
 const VARIANT_STYLES: Record<Variant, string> = {
-  primary: 'rounded-md p-2 border border-border',
+  primary: 'rounded-md p-2 border border-border placeholder:font-normal',
 };
 
 @Component({
@@ -27,6 +27,6 @@ export class Input implements FormValueControl<string> {
   public readonly styles = computed(() => {
     const width = this.fullWidth() ? 'w-full' : 'w-auto';
 
-    return `cursor-pointer transition-all disabled:cursor-not-allowed font-semibold ${VARIANT_STYLES[this.variant()]} ${width}`;
+    return `disabled:cursor-not-allowed font-semibold ${VARIANT_STYLES[this.variant()]} ${width}`;
   });
 }
