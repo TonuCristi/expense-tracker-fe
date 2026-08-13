@@ -1,0 +1,18 @@
+<app-button
+  variant="empty"
+  (clicked)="openConfirmationModal()"
+  class="hover:bg-surface text-foreground-muted flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all hover:text-red-500"
+>
+  <i class="pi pi-trash"></i>
+</app-button>
+
+@if (isConfirmationModalOpen()) {
+  <app-confirmation-modal
+    title="Delete wallet"
+    prompt="Are you sure you want to delete the wallet?"
+    confirmText="Yes"
+    cancelText="No"
+    (confirmed)="walletsStore.deleteWallet(walletId())"
+    (cancelled)="closeConfirmationModal()"
+  />
+}

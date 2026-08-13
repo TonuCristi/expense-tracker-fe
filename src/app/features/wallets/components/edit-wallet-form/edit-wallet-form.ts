@@ -1,40 +1,43 @@
-import { Component, inject, model, signal } from '@angular/core';
-import { form, FormField, FormRoot, maxLength, min, required } from '@angular/forms/signals';
+import { Component, inject, input, linkedSignal, model } from '@angular/core';
+import { form, maxLength, min, required, FormField, FormRoot } from '@angular/forms/signals';
 
-import { Button } from '../../../../shared/ui/button/button';
 import { Overlay } from '../../../../shared/ui/overlay/overlay';
+import { Button } from '../../../../shared/ui/button/button';
 import { Input } from '../../../../shared/ui/input/input';
+import { Wallet } from '../../../../core/wallets/wallet.models';
 import { WalletsStore } from '../../../../core/store/wallets.store';
 import { CURRENCY_OPTIONS } from '../../../../shared/constants';
 import { Currency } from '../../../../shared/models';
 
-interface AddWalletFormModel {
+interface EditWalletFormModel {
   name: string;
   currency: Currency;
   balance: number;
 }
 
 @Component({
-  selector: 'app-add-wallet-form',
+  selector: 'app-edit-wallet-form',
   imports: [Button, FormField, FormRoot, Overlay, Input],
-  templateUrl: './add-wallet-form.html',
-  styleUrl: './add-wallet-form.css',
+  templateUrl: './edit-wallet-form.html',
+  styleUrl: './edit-wallet-form.css',
 })
-export class AddWalletForm {
+export class EditWalletForm {
+  public readonly wallet = input.required<Wallet>();
+
   public readonly walletsStore = inject(WalletsStore);
 
   public readonly isFormOpen = model<boolean>(false);
 
   public readonly currencyOptions = CURRENCY_OPTIONS;
 
-  public readonly addWalletModel = signal<AddWalletFormModel>({
-    name: '',
-    currency: 'eur',
-    balance: 0,
-  });
+  public readonly editWalletModel = linkedSignal<EditWalletFormModel>(() => ({
+    name: this.wallet().name,
+    currency: this.wallet().currency,
+    balance: this.wallet().balance,
+  }));
 
-  public readonly addWalletForm = form(
-    this.addWalletModel,
+  public readonly editWalletForm = form(
+    this.editWalletModel,
     (schemaPath) => {
       required(schemaPath.name, { message: 'The name field is required!' });
       maxLength(schemaPath.name, 60, {
@@ -57,6 +60,9 @@ export class AddWalletForm {
   }
 
   private async submitForm() {
-    this.walletsStore.addWallet(this.addWalletForm().value());
+    this.walletsStore.editWallet({
+      walletId: this.wallet().id,
+      walletPayload: this.editWalletForm().value(),
+    });
   }
 }

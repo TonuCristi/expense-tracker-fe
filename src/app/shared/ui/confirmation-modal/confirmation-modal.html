@@ -1,0 +1,27 @@
+<app-overlay>
+  <div class="bg-background border-border flex w-xs flex-col rounded-md border p-4">
+    <div class="border-border mb-4 flex items-center justify-between gap-4 border-b pb-2">
+      <h3 class="font-semibold">{{ title() }}</h3>
+      <app-button variant="empty" [disabled]="isLoading()" (clicked)="cancel()">
+        <i class="pi pi-times"></i>
+      </app-button>
+    </div>
+    <p class="mb-8 text-xs">{{ prompt() }}</p>
+    <div class="grid grid-cols-2 gap-4">
+      <app-button
+        variant="secondary"
+        [fullWidth]="true"
+        [disabled]="isLoading()"
+        (clicked)="cancel()"
+        >{{ cancelText() }}</app-button
+      >
+      <app-button
+        variant="primary"
+        [fullWidth]="true"
+        [disabled]="isLoading()"
+        (clicked)="confirm()"
+        >{{ confirmText() }}</app-button
+      >
+    </div>
+  </div>
+</app-overlay>
