@@ -3,12 +3,7 @@
     <div class="bg-surface flex h-10 w-10 items-center justify-center rounded-md font-bold">
       {{ wallet().name[0].toUpperCase() }}
     </div>
-    <app-button
-      variant="empty"
-      class="text-foreground-muted hover:bg-surface ml-auto flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all hover:text-blue-500"
-    >
-      <i class="pi pi-pencil"></i>
-    </app-button>
+    <app-edit-wallet-button [wallet]="wallet()" class="ml-auto" />
     <app-delete-wallet-button [walletId]="wallet().id" />
   </div>
   <h2 class="mb-4 text-base font-semibold">{{ wallet().name }}</h2>

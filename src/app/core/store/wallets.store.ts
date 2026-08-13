@@ -6,7 +6,7 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 
-import { AddWalletPayload, Wallet } from '../wallets/wallet.models';
+import { AddWalletPayload, EditWalletParams, Wallet } from '../wallets/wallet.models';
 import { Wallets } from '../wallets/wallets';
 
 interface WalletsState {
@@ -54,6 +54,38 @@ export const WalletsStore = signalStore(
         }),
       ),
     ),
+    editWallet: rxMethod<EditWalletParams>(
+      pipe(
+        tap(() => patchState(store, { isMutating: true })),
+        switchMap(({ walletId, walletPayload }: EditWalletParams) => {
+          return walletsService.editWallet(walletId, walletPayload).pipe(
+            tapResponse({
+              next: () => {
+                patchState(store, {
+                  isMutating: false,
+                  wallets: store.wallets().map((wallet) =>
+                    wallet.id === walletId
+                      ? {
+                          ...wallet,
+                          name: walletPayload.name,
+                          currency: walletPayload.currency,
+                          balance: walletPayload.balance,
+                        }
+                      : wallet,
+                  ),
+                });
+              },
+              error: (error: HttpErrorResponse) => {
+                patchState(store, {
+                  isMutating: false,
+                  error: error.error.message ?? 'Something went wrong!',
+                });
+              },
+            }),
+          );
+        }),
+      ),
+    ),
     deleteWallet: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isMutating: true })),
@@ -61,7 +93,6 @@ export const WalletsStore = signalStore(
           return walletsService.deleteWallet(walletId).pipe(
             tapResponse({
               next: () => {
-                console.log(store.wallets());
                 patchState(store, {
                   wallets: store.wallets().filter((wallet) => wallet.id !== walletId),
                   isMutating: false,

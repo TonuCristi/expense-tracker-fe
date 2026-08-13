@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {
   AddWalletPayload,
   AddWalletResponse,
+  EditWalletPayload,
   GetWalletsResponse,
   MessageResponse,
 } from './wallet.models';
@@ -19,6 +20,13 @@ export class Wallets {
 
   public addWallet(walletPayload: AddWalletPayload): Observable<AddWalletResponse> {
     return this.http.post<AddWalletResponse>(this.apiUrl, walletPayload);
+  }
+
+  public editWallet(
+    walletId: string,
+    walletPayload: EditWalletPayload,
+  ): Observable<MessageResponse> {
+    return this.http.put<MessageResponse>(`${this.apiUrl}/${walletId}`, walletPayload);
   }
 
   public deleteWallet(walletId: string): Observable<MessageResponse> {

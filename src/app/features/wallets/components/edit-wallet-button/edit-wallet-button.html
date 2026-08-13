@@ -1,0 +1,11 @@
+<app-button
+  variant="empty"
+  (clicked)="openForm()"
+  class="text-foreground-muted hover:bg-surface flex h-6 w-6 cursor-pointer items-center justify-center rounded-full transition-all hover:text-blue-500"
+>
+  <i class="pi pi-pencil"></i>
+</app-button>
+
+@if (isFormOpen()) {
+  <app-edit-wallet-form [wallet]="wallet()" [(isFormOpen)]="isFormOpen" />
+}
