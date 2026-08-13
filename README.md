@@ -1,59 +1,43 @@
-# ExpenseTrackerFe
+# 💰 Expense Tracker (Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.14.
+Frontend application for an expense tracking system where users create accounts, manage multiple wallets, and monitor their spending. Users can track a combined balance across wallets and view spending insights through a dashboard with overviews and top spending categories.
 
-## Development server
+This app handles the UI, client-side state, form validation, and secure session-based authentication.
 
-To start a local development server, run:
+## 🚀 Features
 
-```bash
-ng serve
-```
+- User authentication (register / login / logout)
+- Session-based auth with route guards and HTTP interceptors
+- Wallet management (create, delete, list)
+- Combined balance and wallet count across currencies
+- Dashboard with spending overview and top spending categories
+- Reusable UI component library (inputs, buttons, modals, overlays)
+- Responsive UI
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🧠 Tech Stack
 
-## Code scaffolding
+- Angular 21
+- NgRx Signals (state management)
+- Angular Signal Forms (form handling & validation)
+- Tailwind CSS
+- RxJS
+- TypeScript
+- Vitest
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠️ Key Concepts Implemented
 
-```bash
-ng generate component component-name
-```
+- Signal-based reactive state management
+- Custom form controls integrated with Signal Forms
+- Route guards and HTTP interceptors
+- HttpOnly cookie authentication
+- Feature-based project architecture
+- Reusable, presentational component design
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📌 Status
 
-```bash
-ng generate --help
-```
+This project is currently in development.
 
-## Building
+## 🔗 Links
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Backend](https://github.com/TonuCristi/expense-tracker-be)
+- [GitHub Profile](https://github.com/TonuCristi)
