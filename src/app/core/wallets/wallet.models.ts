@@ -17,11 +17,6 @@ export interface EditWalletParams {
   walletPayload: EditWalletPayload;
 }
 
-export interface EditWalletParams {
-  walletId: string;
-  walletPayload: EditWalletPayload;
-}
-
 export interface AddWalletResponse extends MessageResponse {
   wallet: Wallet;
 }
