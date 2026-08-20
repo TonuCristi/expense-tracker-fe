@@ -1,5 +1,5 @@
 import { signalStore, withState } from '@ngrx/signals';
-import { Transaction } from '../transactions/transactions.models';
+import { Transaction } from './transactions.models';
 
 interface TransactionsState {
   transactions: Transaction[];

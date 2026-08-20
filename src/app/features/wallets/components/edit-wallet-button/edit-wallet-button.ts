@@ -1,8 +1,8 @@
 import { Component, input, signal } from '@angular/core';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { Wallet } from '../../../../core/wallets/wallet.models';
 import { EditWalletForm } from '../edit-wallet-form/edit-wallet-form';
+import { Wallet } from '../../data-access/wallet.models';
 
 @Component({
   selector: 'app-edit-wallet-button',

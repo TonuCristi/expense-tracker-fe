@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { Login } from './login/login';
 import { Register } from './register/register';
 
-export const authRoutes: Routes = [
+const authRoutes: Routes = [
   {
     path: 'login',
     component: Login,
@@ -17,3 +17,5 @@ export const authRoutes: Routes = [
     pathMatch: 'full',
   },
 ];
+
+export default authRoutes;

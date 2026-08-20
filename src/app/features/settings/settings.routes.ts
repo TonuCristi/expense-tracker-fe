@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { Settings } from './settings';
 
-export const settingsRoutes: Routes = [
+const settingsRoutes: Routes = [
   {
     path: '',
     component: Settings,
   },
 ];
+
+export default settingsRoutes;

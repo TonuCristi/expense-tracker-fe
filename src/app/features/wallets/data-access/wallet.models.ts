@@ -1,16 +1,16 @@
-import { Currency } from '../../shared/models';
+import { Currency } from '../../../shared/models';
 
-export interface AddWalletPayload {
+export interface Wallet {
+  id: string;
   name: string;
   currency: Currency;
   balance: number;
+  createdAt: string;
 }
 
-export interface EditWalletPayload {
-  name: string;
-  currency: Currency;
-  balance: number;
-}
+export interface AddWalletPayload extends Omit<Wallet, 'id' | 'createdAt'> {}
+
+export interface EditWalletPayload extends Omit<Wallet, 'id' | 'createdAt'> {}
 
 export interface EditWalletParams {
   walletId: string;
@@ -27,12 +27,4 @@ export interface MessageResponse {
 
 export interface GetWalletsResponse {
   wallets: Wallet[];
-}
-
-export interface Wallet {
-  id: string;
-  name: string;
-  currency: Currency;
-  balance: number;
-  createdAt: string;
 }

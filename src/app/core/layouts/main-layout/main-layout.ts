@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Sidebar } from '../../../shared/ui/sidebar/sidebar';
-import { WalletsStore } from '../../store/wallets.store';
+import { WalletsStore } from '../../../features/wallets/data-access/wallets.store';
 import { Spinner } from '../../../shared/ui/spinner/spinner';
 
 @Component({

@@ -8,7 +8,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 
 import { LoginPayload, RegisterPayload, User } from '../auth/auth.models';
-import { Auth } from '../auth/auth';
+import { AuthApi } from '../auth/auth-api';
 
 interface AuthState {
   user: User | null;
@@ -28,12 +28,12 @@ export const AuthStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
   withComputed(({ user }) => ({ isAuthenticated: computed(() => !!user()) })),
-  withMethods((store, authService = inject(Auth), router = inject(Router)) => ({
+  withMethods((store, authApi = inject(AuthApi), router = inject(Router)) => ({
     register: rxMethod<RegisterPayload>(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((userPayload) => {
-          return authService.register(userPayload).pipe(
+          return authApi.register(userPayload).pipe(
             tapResponse({
               next: (res) => {
                 patchState(store, { user: res.user, isLoading: false, error: null });
@@ -55,7 +55,7 @@ export const AuthStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap((userPayload) => {
-          return authService.login(userPayload).pipe(
+          return authApi.login(userPayload).pipe(
             tapResponse({
               next: (res) => {
                 patchState(store, { user: res.user, isLoading: false, error: null });
@@ -76,9 +76,9 @@ export const AuthStore = signalStore(
     getMe: rxMethod<void>(
       pipe(
         switchMap(() => {
-          return authService.getMe().pipe(
+          return authApi.getMe().pipe(
             tapResponse({
-              next: (user) => patchState(store, { user, isAuthChecked: true }),
+              next: (res) => patchState(store, { user: res.user, isAuthChecked: true }),
               error: () => {
                 patchState(store, {
                   user: null,
@@ -94,7 +94,7 @@ export const AuthStore = signalStore(
       pipe(
         tap(() => patchState(store, { isLoading: true })),
         switchMap(() => {
-          return authService.logout().pipe(
+          return authApi.logout().pipe(
             tapResponse({
               next: () => {
                 patchState(store, { error: null, user: null, isLoading: false });
