@@ -4,10 +4,10 @@ import { form, maxLength, min, required, FormField, FormRoot } from '@angular/fo
 import { Overlay } from '../../../../shared/ui/overlay/overlay';
 import { Button } from '../../../../shared/ui/button/button';
 import { Input } from '../../../../shared/ui/input/input';
-import { Wallet } from '../../../../core/wallets/wallet.models';
-import { WalletsStore } from '../../../../core/store/wallets.store';
+import { WalletsStore } from '../../data-access/wallets.store';
 import { CURRENCY_OPTIONS } from '../../../../shared/constants';
 import { Currency } from '../../../../shared/models';
+import { Wallet } from '../../data-access/wallet.models';
 
 interface EditWalletFormModel {
   name: string;
@@ -39,13 +39,16 @@ export class EditWalletForm {
   public readonly editWalletForm = form(
     this.editWalletModel,
     (schemaPath) => {
+      /* ----- Name validation ----- */
       required(schemaPath.name, { message: 'The name field is required!' });
       maxLength(schemaPath.name, 60, {
         message: "The name should't be longer than 60 characters!",
       });
 
+      /* ----- Currency validation ----- */
       required(schemaPath.currency, { message: 'The currency field is required!' });
 
+      /* ----- Balance validation ----- */
       min(schemaPath.balance, 0, { message: 'The balance must be at least 0!' });
     },
     {

@@ -10,10 +10,10 @@ import {
   GetWalletsResponse,
   MessageResponse,
 } from './wallet.models';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
-export class Wallets {
+export class WalletsApi {
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = `${environment.apiUrl}/wallets`;

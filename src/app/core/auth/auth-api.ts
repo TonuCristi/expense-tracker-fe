@@ -3,13 +3,19 @@ import { inject, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { AuthResponse, LoginPayload, RegisterPayload, User } from './auth.models';
+import {
+  AuthResponse,
+  LoginPayload,
+  MessageResponse,
+  RegisterPayload,
+  UserResponse,
+} from './auth.models';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class Auth {
+export class AuthApi {
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = `${environment.apiUrl}/auth`;
@@ -22,11 +28,11 @@ export class Auth {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, userPayload);
   }
 
-  public getMe(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/me`);
+  public getMe(): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/me`);
   }
 
-  public logout(): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/logout`, null);
+  public logout(): Observable<MessageResponse> {
+    return this.http.post<MessageResponse>(`${this.apiUrl}/logout`, null);
   }
 }

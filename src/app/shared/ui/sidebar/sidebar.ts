@@ -1,8 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { AuthStore } from '../../../core/store/auth.store';
-import { getInitials } from '../../utils/string.utils';
+import { InitialsPipe } from '../../pipes/initials-pipe';
 
 const NAV_LINKS = [
   {
@@ -24,7 +24,7 @@ const NAV_LINKS = [
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, InitialsPipe],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
@@ -32,6 +32,4 @@ export class Sidebar {
   public readonly navLinks = NAV_LINKS;
 
   public readonly authStore = inject(AuthStore);
-
-  public readonly userInitials = computed(() => getInitials(this.authStore.user()?.username));
 }

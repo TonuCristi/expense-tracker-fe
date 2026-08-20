@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 
-import { WalletsStore } from '../../../../core/store/wallets.store';
+import { WalletsStore } from '../../data-access/wallets.store';
 
 @Component({
   selector: 'app-combined-balance',

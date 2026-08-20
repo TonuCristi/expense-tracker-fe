@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 
-import { WalletsStore } from '../../../../core/store/wallets.store';
+import { WalletsStore } from '../../../wallets/data-access/wallets.store';
 
 @Component({
   selector: 'app-wallets-carousel',

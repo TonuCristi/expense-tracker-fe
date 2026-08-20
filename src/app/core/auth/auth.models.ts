@@ -1,14 +1,3 @@
-export interface RegisterPayload {
-  username: string;
-  email: string;
-  password: string;
-}
-
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
 export interface User {
   id: string;
   username: string;
@@ -16,7 +5,20 @@ export interface User {
   createdAt: string;
 }
 
-export interface AuthResponse {
+export interface RegisterPayload extends Omit<User, 'id' | 'createdAt'> {
+  password: string;
+}
+
+export interface LoginPayload extends Pick<User, 'email'> {
+  password: string;
+}
+
+export interface AuthResponse extends MessageResponse {
   user: User;
+}
+
+export interface UserResponse extends Pick<AuthResponse, 'user'> {}
+
+export interface MessageResponse {
   message: string;
 }

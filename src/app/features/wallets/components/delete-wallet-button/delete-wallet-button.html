@@ -12,6 +12,7 @@
     prompt="Are you sure you want to delete the wallet?"
     confirmText="Yes"
     cancelText="No"
+    [isLoading]="walletsStore.isMutating()"
     (confirmed)="walletsStore.deleteWallet(walletId())"
     (cancelled)="closeConfirmationModal()"
   />

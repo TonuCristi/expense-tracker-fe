@@ -1,7 +1,7 @@
 <div class="border-border bg-primary h-full rounded-md border p-4">
   <div class="mb-4 flex items-center gap-2">
     <div class="bg-surface flex h-10 w-10 items-center justify-center rounded-md font-bold">
-      {{ wallet().name[0].toUpperCase() }}
+      {{ wallet().name | initials: 2 }}
     </div>
     <app-edit-wallet-button [wallet]="wallet()" class="ml-auto" />
     <app-delete-wallet-button [walletId]="wallet().id" />

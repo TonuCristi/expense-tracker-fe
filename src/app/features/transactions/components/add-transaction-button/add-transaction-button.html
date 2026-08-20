@@ -1,0 +1,5 @@
+<app-button (clicked)="openForm()">Add transaction</app-button>
+
+@if (isFormOpen()) {
+  <app-add-transaction-form [(isFormOpen)]="isFormOpen" />
+}

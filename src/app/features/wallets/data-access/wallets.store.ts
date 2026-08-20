@@ -6,8 +6,8 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 
-import { AddWalletPayload, EditWalletParams, Wallet } from '../wallets/wallet.models';
-import { Wallets } from '../wallets/wallets';
+import { AddWalletPayload, EditWalletParams, Wallet } from './wallet.models';
+import { WalletsApi } from './wallets-api';
 
 interface WalletsState {
   wallets: Wallet[];
@@ -29,12 +29,12 @@ export const WalletsStore = signalStore(
     walletsCount: computed(() => wallets().length),
     combinedBalance: computed(() => wallets().reduce((acc, wallet) => acc + wallet.balance, 0)),
   })),
-  withMethods((store, walletsService = inject(Wallets)) => ({
+  withMethods((store, walletsApi = inject(WalletsApi)) => ({
     addWallet: rxMethod<AddWalletPayload>(
       pipe(
         tap(() => patchState(store, { isMutating: true })),
         switchMap((walletPayload) => {
-          return walletsService.addWallet(walletPayload).pipe(
+          return walletsApi.addWallet(walletPayload).pipe(
             tapResponse({
               next: (res) => {
                 patchState(store, {
@@ -58,7 +58,7 @@ export const WalletsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isMutating: true })),
         switchMap(({ walletId, walletPayload }: EditWalletParams) => {
-          return walletsService.editWallet(walletId, walletPayload).pipe(
+          return walletsApi.editWallet(walletId, walletPayload).pipe(
             tapResponse({
               next: () => {
                 patchState(store, {
@@ -90,7 +90,7 @@ export const WalletsStore = signalStore(
       pipe(
         tap(() => patchState(store, { isMutating: true })),
         switchMap((walletId: string) => {
-          return walletsService.deleteWallet(walletId).pipe(
+          return walletsApi.deleteWallet(walletId).pipe(
             tapResponse({
               next: () => {
                 patchState(store, {
@@ -112,7 +112,7 @@ export const WalletsStore = signalStore(
     getWallets: rxMethod<void>(
       pipe(
         switchMap(() => {
-          return walletsService.getWallets().pipe(
+          return walletsApi.getWallets().pipe(
             tapResponse({
               next: (res) => {
                 patchState(store, { wallets: res.wallets, isLoading: false, error: null });

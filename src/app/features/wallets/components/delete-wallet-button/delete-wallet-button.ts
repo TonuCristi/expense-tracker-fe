@@ -1,7 +1,7 @@
 import { Component, inject, input, signal } from '@angular/core';
 
 import { Button } from '../../../../shared/ui/button/button';
-import { WalletsStore } from '../../../../core/store/wallets.store';
+import { WalletsStore } from '../../data-access/wallets.store';
 import { ConfirmationModal } from '../../../../shared/ui/confirmation-modal/confirmation-modal';
 
 @Component({
